@@ -1,0 +1,27 @@
+[linters]
+  disable = [
+    # things that will likely never be fixed
+    "exhaustruct", # objectively gross, literally nobody wants this
+    "gofumpt",     # conflicts with goimports
+
+    # too noisy without explicit configuration
+    "depguard",
+  ]
+  presets = [
+    "bugs",
+    "comment",
+    "complexity",
+    "error",
+    "format",
+    "import",
+    "metalinter",
+    "module",
+    "performance",
+    "sql",
+    "style",
+    "test",
+    "unused",
+  ]
+
+[linters-settings.govet]
+  enable-all = true
