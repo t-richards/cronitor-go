@@ -20,7 +20,7 @@ jobs:
         go tool cover -html=coverage/cover.out -o coverage/index.html
 
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v4
+      uses: codecov/codecov-action@v5
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         files: coverage/cover.out
