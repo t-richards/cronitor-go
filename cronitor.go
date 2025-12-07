@@ -1,3 +1,4 @@
+// Package cronitor provides a minimal interface for sending telemetry events to Cronitor.io.
 package cronitor
 
 import (
@@ -31,6 +32,7 @@ const (
 )
 
 var (
+	// ErrFailedToSendCronitorEvent is returned when sending a cronitor event fails.
 	ErrFailedToSendCronitorEvent = errors.New("failed to send cronitor event")
 )
 
@@ -45,17 +47,17 @@ func New(url string) Cronitor {
 	}
 }
 
-// Indicates that the job has started running.
+// Run indicates that the job has started running.
 func (c Cronitor) Run(ctx context.Context) error {
 	return c.sendEvent(ctx, run)
 }
 
-// Indicates that the job has completed successfully.
+// Complete indicates that the job has completed successfully.
 func (c Cronitor) Complete(ctx context.Context) error {
 	return c.sendEvent(ctx, complete)
 }
 
-// Indicates that the job has failed.
+// Fail indicates that the job has failed.
 func (c Cronitor) Fail(ctx context.Context) error {
 	return c.sendEvent(ctx, fail)
 }
@@ -69,7 +71,10 @@ func (c Cronitor) sendEvent(ctx context.Context, state state) error {
 	if err != nil {
 		return fmt.Errorf("%w: %w", ErrFailedToSendCronitorEvent, err)
 	}
-	defer resp.Body.Close()
+
+	defer func() {
+		_ = resp.Body.Close()
+	}()
 
 	if resp.StatusCode != http.StatusOK {
 		return fmt.Errorf("%w: %s", ErrFailedToSendCronitorEvent, resp.Status)

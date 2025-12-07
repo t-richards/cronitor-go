@@ -1,27 +1,20 @@
+version = "2"
+
 [linters]
-  disable = [
-    # things that will likely never be fixed
-    "exhaustruct", # objectively gross, literally nobody wants this
-    "gofumpt",     # conflicts with goimports
+default = "all"
+disable = [
+  # objectively gross, literally nobody wants this
+  "exhaustruct",
 
-    # too noisy without explicit configuration
-    "depguard",
-  ]
-  presets = [
-    "bugs",
-    "comment",
-    "complexity",
-    "error",
-    "format",
-    "import",
-    "metalinter",
-    "module",
-    "performance",
-    "sql",
-    "style",
-    "test",
-    "unused",
-  ]
+  # requires explicit configuration
+  "depguard",
 
-[linters-settings.govet]
-  enable-all = true
+  # deprecated
+  "wsl",
+]
+
+[formatters]
+enable = [
+  "gofmt",
+  "goimports"
+]

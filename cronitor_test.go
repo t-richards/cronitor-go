@@ -37,7 +37,6 @@ func TestCronitor_Run(t *testing.T) {
 	defer cancel()
 
 	err := crn.Run(ctx)
-
 	if err != nil {
 		t.Fatalf("Run failed: %v", err)
 	}
@@ -65,7 +64,6 @@ func TestCronitor_Complete(t *testing.T) {
 	defer cancel()
 
 	err := crn.Complete(ctx)
-
 	if err != nil {
 		t.Fatalf("Complete failed: %v", err)
 	}
@@ -93,7 +91,6 @@ func TestCronitor_Fail(t *testing.T) {
 	defer cancel()
 
 	err := crn.Fail(ctx)
-
 	if err != nil {
 		t.Fatalf("Fail failed: %v", err)
 	}
